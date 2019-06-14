@@ -1,0 +1,67 @@
+<div class="main-page" ng-show="loading">
+  <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div ng-hide="loading">
+  <div ng-controller="CreateAudiController" class="modal dataModal">
+    <form name="audiModal" novalidate>
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h4 class="modal-title" ng-if="addAudiButton">Create Auditorium</h4>
+            <h4 class="modal-title" ng-if="editAudiButton">Edit Auditorium</h4>
+            <h4 class="modal-title" ng-if="removeAudiButton">Do you want to delete Audi ?</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <div ng-if="!removeAudiButton" class="modal-body">
+            <div class="form-group">
+              <label class="required" for="name">Name:</label>
+              <input type="name" class="form-control form-group" placeholder="Enter name" name="name"
+                ng-model="audiOject.name" autocomplete="off" required>
+              <div ng-if="audiModal.$submitted || audiModal.name.$touched" ng-messages="audiModal.name.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="required" for="name">Seats:</label>
+              <input type="number" class="form-control form-group" placeholder="Enter seats" name="seats"
+                ng-model="audiOject.seats" autocomplete="off" required>
+              <div ng-if="audiModal.$submitted || audiModal.seats.$touched" ng-messages="audiModal.seats.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Opening Time:</label>
+              <input type="number" class="form-control form-group" placeholder="Enter opening time" name="openingTime"
+                max="24" ng-model="audiOject.opening_time" ng-value=9 autocomplete="off">
+              <div ng-if="audiModal.$submitted || audiModal.openingTime.$touched"
+                ng-messages="audiModal.openingTime.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Closing Time:</label>
+              <input type="number" class="form-control form-group" placeholder="Enter closing time" name="closingTime"
+                max="24" value="21" ng-model="audiOject.closing_time" autocomplete="off">
+              <div ng-if="audiModal.$submitted || audiModal.closingTime.$touched"
+                ng-messages="audiModal.closingTime.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+              </div>
+            </div>
+            <p class="container width span-error">{{non_field_errors}}</p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" ng-click=closeModal() data-dismiss="modal">Close</button>
+            <button type="submit" ng-if="addAudiButton" class="btn btn-success" ng-click=createAudi()>Create</button>
+            <button type="submit" ng-if="editAudiButton" class="btn btn-primary" ng-click=editAudi()>Edit</button>
+            <button type="button" ng-if="removeAudiButton" class="btn btn-danger" data-dismiss="modal"
+              ng-click=removeAudi()>Delete</button>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

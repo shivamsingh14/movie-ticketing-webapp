@@ -1,0 +1,39 @@
+<h1 class="main-page">Add movie</h1>
+<!-- <button class="main-page btn btn-primary" type="button" ng-click=freeSlots()>get free audi slots</button> -->
+<div class="main-page container form-group">
+    <label class="required"><b>Opening Date:</b></label>
+    <input type="date" ng-disabled="datesChoosen" name="startDate" ng-model="dates.start_date" min="{{todayDate | date:'yyyy-MM-dd'}}" placeholder="yyyy-MM-dd" required />
+</div>
+<div class="main-page container form-group">
+    <label class="required"><b>Closing Date:</b></label>
+    <input type="date" ng-disabled="datesChoosen" name="closeDate" ng-model="dates.end_date" min="{{todayDate | date:'yyyy-MM-dd'}}" placeholder="yyyy-MM-dd" required />
+</div>
+<div class="main-page container form-group">
+    <label class="required"><b>Movie Language:</b></label>
+    <div ng-repeat="lang in languages">
+        <input type="radio" name="movieLanguage" ng-model="$parent.language" ng-value="lang">{{lang}}
+    </div>
+</div>
+<div class="main-page container form-group">
+    <label class="required"><b>Movie Type:</b></label>
+    <div ng-repeat="type in types">
+        <input type="radio" name="movieType" ng-model="$parent.type" ng-value="type">{{type}}
+    </div>
+</div>
+<button class="btn btn-primary main-page" type="button" ng-click=freeSlots()>Choose slots</button>
+<button class="btn btn-primary main-page" ng-if="datesChoosen" type="button" ng-click=changeDates()>Change Dates</button>
+<p class="container width span-error">{{non_field_errors}}</p>
+<div ng-repeat="slot in slots">
+    <div class="card main-page">
+        <h5 class="card-header">{{slot.audi.theatre.name}}</h5>
+        <div class="card-body">
+            <p class="card-title">Theatre: {{slot.audi.theatre.name}}</p>
+            <p class="card-title">Audi: {{slot.audi.name}}</p>
+            <div ng-repeat="time in slot.free_slots">
+                <input type="checkbox" ng-checked="selection.indexOf(time) > -1"
+                    ng-click="selectSlot(slot.audi.id, time)"> {{time}}:00 hrs
+            </div>
+        </div>
+    </div>
+</div>
+<button class="main-page btn btn-primary" ng-if="submitButton" type="button" ng-click=slotsBooking()>Add Movie</button>

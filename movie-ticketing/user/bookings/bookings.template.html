@@ -1,0 +1,19 @@
+<div class="main-page" ng-show="loading">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div ng-hide="loading">
+    <h1 class="main-page">MY BOOKINGS</h1>
+    <div ng-repeat="booking in bookings">
+        <div class="card main-page">
+            <h5 class="card-body width">
+                <h5 class="card-header">Ticket Details</h5>
+                <p class="card-title">Movie Name: {{booking.slot.movie.name}}</p>
+                <p class="card-title">Movie Genre: {{booking.slot.movie.about}}</p>
+                <p class="card-title">time: {{booking.slot.slot}}:00 hr</p>
+                <p class="card-title">Date: {{booking.slot.date}}</p>
+                <p class="card-title">Auditorium: {{booking.slot.audi.name}}</p>
+                <p class="card-title">Seats Booked: {{booking.seats_booked}}</p>
+                <p class="card-title">Booking Status: {{booking.booking_status}}</p>
+        </div>
+    </div>
+</div>

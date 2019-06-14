@@ -1,0 +1,50 @@
+<div class="main-page" ng-show="loading">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div>
+    <h1 class="main-page">Booking Page</h1>
+    <div class="card main-page">
+        <div class="card-body">
+            <h5 class="card-title">Name: {{movieDetails.name}}</h5>
+            <p class="card-title">Duration: {{movieDetails.duration}} hr</p>
+            <h5 class="card-title">Languages:</h5>
+            <div ng-repeat="language in movieDetails.language">
+                <p class="card-title">- {{language}}</p>
+            </div>
+            <h5 class="card-title">Movie Types</h5>
+            <div ng-repeat="type in movieDetails.movie_type">
+                <p class="card-title">- {{type}}
+            </div>
+            <div ng-repeat="slot in slots">
+                <h5 class="card-header">Slot Info</h5>
+                <p class="card-title">Seats: {{slot.seats_available}}</p>
+                <p class="card-title">Date: {{slot.date}}</p>
+                <p class="card-title">Time: {{slot.slot}}:00 hrs</p>
+                <p class="card-title">Type: {{slot.movie_type}}</p>
+                <p class="card-title">Audi: {{slot.audi}}</p>
+                <p class="card-title">Language: {{slot.movie_language}}</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target=".dataModal">Seats</button>
+                <button type="button" class="btn btn-primary" ng-click="bookSlot(slot.id)">Book Slot</button>
+            </div>
+        </div>
+        <p class="width span-error">{{non_field_errors}}</p>
+    </div>
+    <div class="modal dataModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter the seats</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="number" class="form-control form-group" placeholder="Enter seats" name="seats"
+                        ng-model="bookTicketObject.seats_booked" autocomplete="off" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

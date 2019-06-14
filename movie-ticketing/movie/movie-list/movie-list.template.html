@@ -1,0 +1,29 @@
+<div class="main-page" ng-show="loading || inProcess">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div ng-hide="loading">
+    <div class="row">
+        <h1 class="main-page col-6">Movie List</h1>
+        <button ng-if="admin" type="button" class="main-page btn btn-success col-1" ng-click="createMovie()">Create Movie</button>
+    </div>
+    <div ng-repeat="movie in movies">
+        <div class="card main-page">
+            <h4 class="card-header">Name: {{movie.name}}</h4>
+            <div class="card-body">
+                <h5 class="card-title">Duration: {{movie.duration}} hr</h5>
+                <h5 class="card-title">Languages:</h5>
+                <div ng-repeat="language in movie.language">
+                    <p class="card-title">- {{language}}</p>
+                </div>
+                <h5 class="card-title">Movie Types</h5>
+                <div ng-repeat="type in movie.movie_type">
+                    <p class="card-title">- {{type}}
+                </div>
+                <button ng-if="admin" type="button" class="btn btn-primary" ng-click="movieDetails(movie.id)">Movie
+                    Details</button>
+                <button ng-if="!admin" type="button" class="btn btn-primary" ng-click="bookTicket(movie.id)">Book
+                    Ticket</button>
+            </div>
+        </div>
+    </div>
+</div>

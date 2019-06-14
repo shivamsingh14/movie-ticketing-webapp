@@ -1,0 +1,78 @@
+<div class="main-page" ng-show="loading">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div ng-hide="loading">
+    <h1 ng-if="!heading" class="main-page">Create Theatre</h1>
+    <h1 ng-if="heading" class="main-page">Theatre Details</h1>
+    <form class="main-page container" name="theatreForm">
+      <fieldset ng-disabled="disable">
+        <div class="form-group">
+          <label class="required" for="name"><b>Name</b></label>
+          <input type="name" class="form-control form-group" placeholder="Enter name" name="name"
+            ng-model="theatreOject.name" autocomplete="off" ng-value="theatreDetail.name" required>
+          <!-- <div ng-if="theatreForm.$submitted || theatreForm.name.$touched" ng-messages="theatreForm.name.$error">
+            <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+          </div> -->
+          {{theatreForm.$submitted}}
+          <div ng-if="theatreForm.$submitted || theatreForm.name.$touched" ng-messages="theatreForm.name.$error">
+            <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="required" for="name"><b>City:</b></label>
+          <input type="name" class="form-control form-group" placeholder="Enter city" name="city"
+            ng-model="theatreOject.city" autocomplete="off" ng-value="theatreDetail.city" required>
+          <div ng-if="theatreForm.$submitted || theatreForm.city.$touched" ng-messages="theatreForm.city.$error">
+            <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+          </div>
+        </div>
+        <div>
+            <label class="required" for="name"><b>State:</b></label>
+          <input type="name" class="form-control form-group" placeholder="Enter state" name="state"
+            ng-model="theatreOject.state" autocomplete="off" ng-value="theatreDetail.state" required>
+          <div ng-if="theatreForm.$submitted || theatreForm.state.$touched" ng-messages="theatreForm.state.$error">
+            <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+          </div>
+        </div>
+        <div>
+            <label class="required" for="name"><b>Zipcode:</b></label>
+          <input type="number" class="form-control form-group" placeholder="Enter zipcode" name="zipcode"
+            ng-model="theatreOject.zipcode" autocomplete="off" ng-value="theatreDetail.zipcode" required>
+          <div ng-if="theatreForm.$submitted || theatreForm.zipcode.$touched" ng-messages="theatreForm.zipcode.$error">
+            <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <button type="button" ng-if="editButton" class="btn btn-primary main-page" ng-click=editPage()>
+      Edit Details
+    </button>
+    <button type="button" ng-if="updateButton" class="btn btn-primary main-page" ng-click=updateTheatre()>
+      Update Details
+    </button>
+    <button ng-if="addAudi" type="button " class="btn btn-success main-page" ng-click="addAuditorium()" data-toggle="modal"
+      data-target=".dataModal">
+      Add Auditorium
+    </button>
+    <button ng-if="createButton" type="button " class="btn btn-success main-page" ng-click=createTheatre()>
+      Create
+    </button>
+    <br><br>
+    <div ng-repeat="audi in audiList">
+      <div class="card main-page">
+        <h5 class="card-header">{{audi.name}}</h5>
+        <div class="card-body">
+          <p class="card-title">Seats: {{audi.seats}}</p>
+          <p class="card-title">Opening Time: {{audi.opening_time}}</p>
+          <p class="card-title">Closing Time: {{audi.closing_time}}</p>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".dataModal"
+            ng-click="removeAudi(audi.id)">Delete</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".dataModal"
+            ng-click="editAudi(audi.id)">Edit Audi </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <create-audi-directive></create-audi-directive>
+    </div>
+</div>

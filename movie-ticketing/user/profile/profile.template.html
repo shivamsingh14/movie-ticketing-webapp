@@ -1,0 +1,94 @@
+<div class="main-page" ng-show="loading">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+<div>
+    <h1 class="main-page">Profile</h1>
+    <form class="main-page container" name="profileForm">
+        <fieldset ng-disabled="disable">
+            <div class="form-group">
+                <label for="name"><b>Name</b></label>
+                <input type="name" class="form-control form-group" placeholder="Enter name" name="name"
+                    ng-model="userUpdateObject.name" autocomplete="off" ng-value="userDetails.name" required>
+                <div ng-if="requiredErrorMessage || theatreForm.name.$touched" ng-messages="theatreForm.name.$error">
+                    <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name"><b>Email</b></label>
+                <input type="name" class="form-control form-group" name="name" ng-model="userUpdateObject.email"
+                    autocomplete="off" ng-value="userDetails.email" ng-disabled="true" required>
+                <div ng-if="requiredErrorMessage || theatreForm.name.$touched" ng-messages="theatreForm.name.$error">
+                    <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><b>Gender:</b></label>
+                <br>
+                <input type="radio" name="userGender" ng-value="'M'" ng-model="userUpdateObject.gender" required>
+                Male
+                <input type="radio" name="userGender" ng-value="'F'" ng-model="userUpdateObject.gender" required>
+                Female
+                <div ng-if="registrationForm.$submitted" ng-messages="registrationForm.userGender.$error">
+                    <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+    <button type="button" class="btn btn-primary main-page" ng-click="editForm()">Edit</button>
+    <button type="button" ng-show="updateButton" class="btn btn-primary main-page"
+        ng-click="updateForm()">Update</button>
+    <button type="button" class="btn btn-primary main-page" data-toggle="modal" data-target=".dataModal">Change Password
+    </button>
+
+    <div class="modal dataModal">
+        <form name="passwordChangeForm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="required" for="password"><b>Old Password</b></label>
+                            <input type="password" class="form-control form-group" placeholder="Enter old Password"
+                                name="oldPassword" ng-model="passwordObject.password" autocomplete="off" required>
+                            <div ng-if="requiredErrorMessage || passwordChangeForm.oldPassword.$touched"
+                                ng-messages="passwordChangeForm.oldPassword.$error">
+                                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="newPassword"><b>New Password</b></label>
+                            <input type="password" class="form-control form-group" placeholder="Enter new Password"
+                                name="newPassword" ng-model="passwordObject.new_password" autocomplete="off" required>
+                            <div ng-if="requiredErrorMessage || passwordChangeForm.newPassword.$touched"
+                                ng-messages="passwordChangeForm.newPassword.$error">
+                                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="confirmPassword"><b>Confirm New Password</b></label>
+                            <input type="password" class="form-control form-group"
+                                placeholder="Enter new Password again" name="confirmPassword"
+                                ng-model="confirm_password" autocomplete="off" required>
+                            <span class="span-error"
+                                ng-show="passwordChangeForm.password != confirmPassword && passwordChangeForm.confirmPassword.$touched">Passwords
+                                do not match.</span>
+                            <div ng-if="requiredErrorMessage || passwordChangeForm.confirmPassword.$touched"
+                                ng-messages="passwordChangeForm.confirmPassword.$error">
+                                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="changePassword()"
+                            ng-disabled="passwordObject.new_password != confirm_password && passwordChangeForm.newPassword.$dirty && passwordChangeForm.confirmPassword.$dirty">
+                            Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

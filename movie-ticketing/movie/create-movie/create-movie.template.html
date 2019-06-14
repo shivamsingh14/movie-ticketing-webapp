@@ -1,0 +1,83 @@
+<div class="main-page" ng-show="loading">
+    <img class="loader-gif main-page" src="/movie-ticketing/Assets/Images/load.gif" />
+</div>
+</div ng-hide="loading">
+<h1 ng-if="!heading" class="main-page">Create Movie</h1>
+<h1 ng-if="heading" class="main-page">Movie Details</h1>
+<form class="main-page container" ng-disabled="disable" name="movieForm">
+    <fieldset ng-disabled="disable">
+        <div class="form-group">
+            <label class="required"><b>Name:</b></label><br>
+            <input type="name" class="form-control form-group" placeholder="Enter name" name="name"
+                ng-model="movieObject.name" autocomplete="off" ng-value="movieDetails.name" required>
+            <div ng-if="movieForm.$submitted || movieForm.name.$touched" ng-messages="movieForm.name.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="required"><b>Duration:</b></label><br>
+            <input type="number" step=".01" class="form-control form-group" placeholder="Enter duration" name="duration"
+                ng-model="movieObject.duration" ng-value="movieDetails.duration" autocomplete="off"
+                ng-disabled="disable" required>
+            <div ng-if="movieForm.$submitted || movieForm.duration.$touched" ng-messages="movieForm.duration.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+            </div>
+        </div>
+        <div>
+            <label class="required"><b>About:</b></label><br>
+            <textarea class="form-control form-group" placeholder="Enter about" name="about"
+                ng-model="movieObject.about" ng-value="movieDetails.about" autocomplete="off" ng-disabled="disable"
+                required></textarea>
+            <div ng-if="movieForm.$submitted || movieForm.about.$touched" ng-messages="movieForm.about.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+            </div>
+        </div>
+        <div>
+            <label class="required"><b>Language:</b></label>
+            <br>
+            <div ng-repeat="language in languages">
+                <input type="checkbox" ng-click="selectLanguage(language)" name="language" required>{{language}}
+            </div>
+            <br>
+            <div ng-messages="movieForm.language.$error">
+                <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+            </div>
+            </div>
+            <div class="form-group">
+                <label class="required"><b>Movie Type:</b></label>
+                <div ng-repeat="movieType in movieTypes">
+                    <input type="checkbox" ng-click="selectType(movieType)" name="movieType">{{movieType}}
+                </div>
+                <br>
+                <div ng-messages="movieForm.movieType.$error">
+                    <div ng-messages-include="movie-ticketing/commons/messages.html"></div>
+                </div>
+            </div>
+    </fieldset>
+</form>
+<button type="button" ng-if="createMovieButton" class="btn btn-primary main-page" ng-click=createMovie()>
+    Create
+</button>
+<button type="button" ng-if="editButton" class="btn btn-primary main-page" ng-click=editPage()>
+    Edit Details
+</button>
+<button type="button" ng-if="addMovieButton" class="btn btn-success main-page" ng-click=addMovie()>
+    Add Movie to theatre
+</button>
+<button type="button" ng-if="updateButton" class="btn btn-primary main-page" ng-click=updateMovieDetails()>
+    Update Details
+</button>
+<br><br>
+<h3 ng-if="slotHead" class="main-page container">Shows</h3>
+<div ng-repeat="show in shows">
+    <div class="card main-page">
+        <h5 class="card-header">Date: {{show.date}}</h5>
+        <div class="card-body">
+            <p class="card-title">Time: {{show.slot}}:00 hrs</p>
+            <p class="card-title">Audi Id: {{show.audi}}</p>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".dataModal"
+                ng-click="cancelBooking(show.id)">Cancel</button>
+        </div>
+    </div>
+</div>
+<div>

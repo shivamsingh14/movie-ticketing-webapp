@@ -1,0 +1,16 @@
+<div class="row">
+    <h1 class="main-page col-6">Theatre List</h1>&nbsp;
+    <button type="button" class="main-page btn btn-success col-1" ng-click="createTheatre()">Create Theatre</button>
+</div>
+<div ng-repeat="theatre in theatres">
+    <div class="card main-page">
+        <h5 class="card-header">{{theatre.name}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">Address-</h5>
+            <p class="card-text">City: {{theatre.city}}</p>
+            <p class="card-text">State: {{theatre.state}}</p>
+            <p class="card-text">Zipcode: {{theatre.zipcode}}</p>
+            <button type="button" class="btn btn-primary" ng-click="editTheatre(theatre.id)">Details</button>
+        </div>
+    </div>
+</div>

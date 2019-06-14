@@ -1,0 +1,16 @@
+<div ng-if="!inProcess">
+    <div ng-if="admin" class="side-nav" ng-controller="NavBarController">
+        <a ui-sref="homeNavBar.movieList" class="border-style">Movie Ticketing</a>
+        <a ui-sref="homeNavBar.movieList">Movies</a>
+        <a ui-sref="homeNavBar.theatreList">Theatres</a>
+        <a ui-sref="navBar.login" ng-click="logout()">Logout</a>
+    </div>
+    <div ng-if="!admin" class="side-nav" ng-controller="NavBarController">
+        <a ui-sref="homeNavBar.movieList" class="border-style">Movie Ticketing</a>
+        <a ui-sref="homeNavBar.movieList">Movies</a>
+        <a ui-sref="homeNavBar.profile">Profile</a>
+        <a ui-sref="homeNavBar.bookings">Bookings</a>        
+        <a ui-sref="navBar.login" ng-click="logout()">Logout</a>
+    </div>
+    <ui-view></ui-view>
+</div>
